@@ -1,0 +1,1630 @@
+1.ExpansionTileCard
+
+expansion_tile_card:^1.1.0
+
+import 'package:flutter/material.dart';
+import 'package:expansion_tile_card/expansion_tile_card.dart';
+
+void main() => runApp(MyApp());
+
+class MyApp extends StatelessWidget {
+@override
+Widget build(BuildContext context) {
+	return MaterialApp(
+	title: 'ExpansionTileCard',
+	theme: ThemeData(
+		primarySwatch: Colors.green,
+	),
+	home: MyHomePage(title: 'GeeksForGeeks'),
+	);
+}
+}
+
+class MyHomePage extends StatefulWidget {
+MyHomePage({Key key, this.title}) : super(key: key);
+
+final String title;
+
+@override
+_MyHomePageState createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> {
+final GlobalKey<ExpansionTileCardState> cardA = new GlobalKey();
+final GlobalKey<ExpansionTileCardState> cardB = new GlobalKey();
+
+@override
+Widget build(BuildContext context) {
+	return Scaffold(
+	appBar: AppBar(
+		title: Text(widget.title),
+	),
+	body: ListView(
+		children: <Widget>[
+		Padding(
+			padding: const EdgeInsets.symmetric(horizontal: 12.0),
+			child: ExpansionTileCard(
+			key: cardB,
+			leading: CircleAvatar(child: Text('A')),
+			title: Text('Tap to Expand!'),
+			subtitle: Text('It has the GFG Logo.'),
+			children: <Widget>[
+				Divider(
+				thickness: 1.0,
+				height: 1.0,
+				),
+				Align(
+				alignment: Alignment.centerLeft,
+				child: Padding(
+					padding: const EdgeInsets.symmetric(
+					horizontal: 16.0,
+					vertical: 8.0,
+					),
+					child: Image.asset('assets/gfg.png')
+				),
+				),
+			],
+			),
+		),
+	]
+	),
+	);
+}
+}
+
+2.date picker and time picker:
+
+import 'package:flutter/material.dart';
+import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
+void main() => runApp(MyApp());
+class MyApp extends StatelessWidget {
+  // This widget is the root of your application.
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Flutter Demo',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      home: MyHomePage(),
+    );
+  }
+}
+class MyHomePage extends StatefulWidget {
+  @override
+  _MyHomePageState createState() => _MyHomePageState();
+}
+class _MyHomePageState extends State<MyHomePage> {
+  var pickeddate;
+  var pickedtime;
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+        appBar: AppBar(
+          title: Text("Flutter Date time Picker"),
+        ),
+        body: Center(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              SizedBox(
+                height: 50.0,
+              ),
+              FloatingActionButton.extended(
+                onPressed: () {
+                  DatePicker.showTime12hPicker(context,
+                      showTitleActions: true,
+                      currentTime: DateTime.now(), onConfirm: (time) {
+                        setState(() {
+                          pickedtime =
+                          "Picked time is : ${time.hour} : ${time.minute} : ${time.second}";
+                        });
+                      });
+                },
+                label: Text("Set Time"),
+                icon: Icon(Icons.timer),
+              ),
+              SizedBox(
+                height: 25,
+              ),
+              FloatingActionButton.extended(
+                onPressed: () {
+                  DatePicker.showDatePicker(context,
+                      showTitleActions: true,
+                      minTime: DateTime(2018, 3, 5),
+                      maxTime: DateTime(2026, 6, 7), onChanged: (date) {
+                        print('change $date');
+                        setState(() {
+                          pickeddate = "${date.day}";
+                        });
+                      }, onConfirm: (date) {
+                        print('confirm $date');
+                        setState(() {
+                          pickeddate =
+                          "Picked Date is : ${date.day}/${date.month}/${date.year}";
+                        });
+                      }, currentTime: DateTime.now(), locale: LocaleType.en);
+                },
+                label: Text("Set Date"),
+                icon: Icon(Icons.date_range),
+              ),
+              SizedBox(
+                height: 50,
+              ),
+              Container(
+                child: (pickeddate == null)
+                    ? Text("Select a date Please")
+                    : Text("$pickeddate"),
+              ),
+              SizedBox(
+                height: 30,
+              ),
+              Container(
+                child: (pickedtime == null)
+                    ? Text("Select a time Please")
+                    : Text("$pickedtime"),
+              ),
+            ],
+          ),
+        ));
+  }
+}
+
+
+import 'package:flutter/material.dart';
+import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
+void main() => runApp(MyApp());
+class MyApp extends StatelessWidget {
+  // This widget is the root of your application.
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Flutter Demo',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      home: MyHomePage(),
+    );
+  }
+}
+class MyHomePage extends StatefulWidget {
+  @override
+  _MyHomePageState createState() => _MyHomePageState();
+}
+class _MyHomePageState extends State<MyHomePage> {
+  var pickeddate;
+  var pickedtime;
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+        appBar: AppBar(
+          title: Text("Flutter Date time Picker"),
+        ),
+        body: Center(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              SizedBox(
+                height: 50.0,
+              ),
+              FloatingActionButton.extended(
+                onPressed: () {
+                  DatePicker.showTime12hPicker(context,
+                      showTitleActions: true,
+                      currentTime: DateTime.now(), onConfirm: (time) {
+                        setState(() {
+                          pickedtime =
+                          "Picked time is : ${time.hour} : ${time.minute} : ${time.second}";
+                        });
+                      });
+                },
+                label: Text("Set Time"),
+                icon: Icon(Icons.timer),
+              ),
+              SizedBox(
+                height: 25,
+              ),
+              FloatingActionButton.extended(
+                onPressed: () {
+                  DatePicker.showDatePicker(context,
+                      showTitleActions: true,
+                      minTime: DateTime(2018, 3, 5),
+                      maxTime: DateTime(2026, 6, 7), onChanged: (date) {
+                        print('change $date');
+                        setState(() {
+                          pickeddate = "${date.day}";
+                        });
+                      }, onConfirm: (date) {
+                        print('confirm $date');
+                        setState(() {
+                          pickeddate =
+                          "Picked Date is : ${date.day}/${date.month}/${date.year}";
+                        });
+                      }, currentTime: DateTime.now(), locale: LocaleType.en);
+                },
+                label: Text("Set Date"),
+                icon: Icon(Icons.date_range),
+              ),
+              SizedBox(
+                height: 50,
+              ),
+              Container(
+                child: (pickeddate == null)
+                    ? Text("Select a date Please")
+                    : Text("$pickeddate"),
+              ),
+              SizedBox(
+                height: 30,
+              ),
+              Container(
+                child: (pickedtime == null)
+                    ? Text("Select a time Please")
+                    : Text("$pickedtime"),
+              ),
+            ],
+          ),
+        ));
+  }
+}
+
+lazy loader:
+
+
+lazy_load_scrollview:^1.1.0
+
+import 'package:flutter/material.dart';
+import 'package:lazy_load_scrollview/lazy_load_scrollview.dart';
+
+void main() => runApp(new MyApp());
+
+class MyApp extends StatelessWidget {
+// This widget is the root of your application.
+@override
+Widget build(BuildContext context) {
+	return new MaterialApp(
+	title: 'Example',
+	home: new MyHomePage(title: 'GeeksForGeeks'),
+	);
+}
+}
+
+class MyHomePage extends StatefulWidget {
+MyHomePage({Key key, this.title}) : super(key: key);
+
+final String title;
+
+@override
+_MyHomePageState createState() => new _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> {
+List<int> data = [];
+int currentLength = 0;
+
+final int increment = 10;
+bool isLoading = false;
+
+@override
+void initState() {
+	_loadMore();
+	super.initState();
+}
+
+Future _loadMore() async {
+	setState(() {
+	isLoading = true;
+	});
+
+	// Add in an artificial delay
+	await new Future.delayed(const Duration(seconds: 2));
+	for (var i = currentLength; i <= currentLength + increment; i++) {
+	data.add(i);
+	}
+	setState(() {
+	isLoading = false;
+	currentLength = data.length;
+	});
+}
+
+@override
+Widget build(BuildContext context) {
+	return Scaffold(
+	appBar: AppBar(
+		title: Text(widget.title),
+		backgroundColor: Colors.green,
+	),
+	body: LazyLoadScrollView(
+		isLoading: isLoading,
+		onEndOfPage: () => _loadMore(),
+		child: ListView.builder(
+		itemCount: data.length,
+		itemBuilder: (context, position) {
+			return DemoItem(position);
+		},
+		),
+	),
+	);
+}
+}
+
+class DemoItem extends StatelessWidget {
+final int position;
+
+const DemoItem(
+	this.position, {
+		Key key,
+	}) : super(key: key);
+
+@override
+Widget build(BuildContext context) {
+	return Card(
+	child: Padding(
+		padding: const EdgeInsets.all(8.0),
+		child: Column(
+		crossAxisAlignment: CrossAxisAlignment.start,
+		children: <Widget>[
+			Row(
+			crossAxisAlignment: CrossAxisAlignment.center,
+			children: <Widget>[
+				Container(
+				color: Colors.deepOrange,
+				height: 40.0,
+				width: 40.0,
+				),
+				SizedBox(width: 8.0),
+				Text("Item $position"),
+			],
+			),
+			Text(
+				"GeeksforGeeks.org was created with a goal "
+					"in mind to provide well written, well "
+					"thought and well explained solutions for selected"
+					" questions. The core team of five super geeks"
+					" constituting of technology lovers and computer"
+					" science enthusiasts have been constantly working"
+					" in this direction ."),
+		],
+		),
+	),
+	);
+}
+}
+
+background local notification:
+1.
+workmanager: ^0.2.3
+  # Use with FlutterLocalNotificationsPlugin class for local push notifications.
+  flutter_local_notifications: ^1.4.4+2
+
+2.
+<!-- Add below permission inside 'manifest' tag -->
+<uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+<!-- Add below permission inside 'application' tag -->
+<receiver android:name="com.dexterous.flutterlocalnotifications.ScheduledNotificationBootReceiver">
+    <intent-filter>
+        <action android:name="android.intent.action.BOOT_COMPLETED"/>
+        <action android:name="android.intent.action.MY_PACKAGE_REPLACED"/>
+    </intent-filter>
+</receiver>
+
+3.
+import 'package:flutter/material.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:workmanager/workmanager.dart';
+
+void main() {
+
+// needed if you intend to initialize in the `main` function
+WidgetsFlutterBinding.ensureInitialized();
+Workmanager().initialize(
+	
+	// The top level function, aka callbackDispatcher
+	callbackDispatcher,
+	
+	// If enabled it will post a notification whenever
+	// the task is running. Handy for debugging tasks
+	isInDebugMode: true
+);
+// Periodic task registration
+Workmanager().registerPeriodicTask(
+	"2",
+	
+	//This is the value that will be
+	// returned in the callbackDispatcher
+	"simplePeriodicTask",
+	
+	// When no frequency is provided
+	// the default 15 minutes is set.
+	// Minimum frequency is 15 min.
+	// Android will automatically change
+	// your frequency to 15 min
+	// if you have configured a lower frequency.
+	frequency: Duration(minutes: 15),
+);
+runApp(MyApp());
+}
+
+void callbackDispatcher() {
+Workmanager().executeTask((task, inputData) {
+	
+	// initialise the plugin of flutterlocalnotifications.
+	FlutterLocalNotificationsPlugin flip = new FlutterLocalNotificationsPlugin();
+	
+	// app_icon needs to be a added as a drawable
+	// resource to the Android head project.
+	var android = new AndroidInitializationSettings('@mipmap/ic_launcher');
+	var IOS = new IOSInitializationSettings();
+	
+	// initialise settings for both Android and iOS device.
+	var settings = new InitializationSettings(android, IOS);
+	flip.initialize(settings);
+	_showNotificationWithDefaultSound(flip);
+	return Future.value(true);
+});
+}
+
+Future _showNotificationWithDefaultSound(flip) async {
+
+// Show a notification after every 15 minute with the first
+// appearance happening a minute after invoking the method
+var androidPlatformChannelSpecifics = new AndroidNotificationDetails(
+	'your channel id',
+	'your channel name',
+	'your channel description',
+	importance: Importance.Max,
+	priority: Priority.High
+);
+var iOSPlatformChannelSpecifics = new IOSNotificationDetails();
+
+// initialise channel platform for both Android and iOS device.
+var platformChannelSpecifics = new NotificationDetails(
+	androidPlatformChannelSpecifics,
+	iOSPlatformChannelSpecifics
+);
+await flip.show(0, 'GeeksforGeeks',
+	'Your are one step away to connect with GeeksforGeeks',
+	platformChannelSpecifics, payload: 'Default_Sound'
+);
+}
+
+class MyApp extends StatelessWidget {
+// This widget is the root of your application.
+@override
+Widget build(BuildContext context) {
+	return MaterialApp(
+	title: 'Geeks Demo',
+	theme: ThemeData(
+		
+		// This is the theme
+		// of your application.
+		primarySwatch: Colors.green,
+	),
+	home: HomePage(title: "GeeksforGeeks"),
+	);
+}
+}
+
+class HomePage extends StatefulWidget {
+HomePage({Key key, this.title}) : super(key: key);
+// This widget is the home page of your application.
+// It is stateful, meaning
+// that it has a State object (defined below)
+// that contains fields that affect
+// how it looks.
+
+// This class is the configuration for the state.
+// It holds the values (in this
+// case the title) provided by the parent
+// (in this case the App widget) and
+// used by the build method of the State.
+// Fields in a Widget subclass are
+// always marked "final".
+
+final String title;
+
+@override
+_HomePageState createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+@override
+Widget build(BuildContext context) {
+	
+	// This method is rerun every time setState is called.
+	// The Flutter framework has been optimized
+	// to make rerunning build methods
+	// fast, so that you can just rebuild
+	// anything that needs updating rather
+	// than having to individually change
+	//instances of widgets.
+	return Scaffold(
+	appBar: AppBar(
+		
+		// Here we take the value from
+		// the MyHomePage object that was created by
+		// the App.build method, and use it
+		// to set our appbar title.
+		title: Text(widget.title),
+	),
+	body: new Container(),
+	);
+}
+}
+text to speech:
+
+1.
+flutter_text_to_speech: ^3.0.7
+
+2.
+minSdkVersion 21 //make this to 21
+
+3.
+import 'package:flutter/material.dart';
+import 'package:flutter_text_to_speech/flutter_text_to_speech.dart';
+
+void main() => runApp(MyApp());
+
+class MyApp extends StatelessWidget {
+  // This widget is the root of your application.
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: 'Text To Speech',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      home: MyHomePage(title: 'Text To Speech'),
+    );
+  }
+}
+
+class MyHomePage extends StatefulWidget {
+  MyHomePage({Key key, this.title}) : super(key: key);
+
+  final String title;
+
+  @override
+  _MyHomePageState createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> {
+  VoiceController _voiceController;
+
+  String text =
+      'This is an example tutorial of using text to speech in a flutter application! The example is provided on fluttercentral website.';
+
+  @override
+  void initState() {
+    _voiceController = FlutterTextToSpeech.instance.voiceController();
+
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _voiceController.stop();
+  }
+
+  _playVoice() {
+    _voiceController.init().then((_) {
+      _voiceController.speak(
+        text,
+        VoiceControllerOptions(),
+      );
+    });
+  }
+
+  _stopVoice() {
+    _voiceController.stop();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(widget.title),
+      ),
+      body: Center(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              text,
+              textAlign: TextAlign.center,
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            RaisedButton(
+              onPressed: _playVoice,
+              color: Colors.blue,
+              child: Text('Play Voice'),
+            ),
+            RaisedButton(
+              onPressed: _stopVoice,
+              color: Colors.blue,
+              child: Text('Stop Voice'),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+audio player:
+ 
+1. 
+  audioplayers:
+  path:
+  provider: ^3.0.0+1
+2.
+assets:
+   - sample.mp3
+3.
+import 'dart:async';
+import 'dart:io';
+
+import 'package:audioplayers/audio_cache.dart';
+import 'package:audioplayers/audioplayers.dart';
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(MaterialApp(home: MyApp()));
+}
+
+class MyApp extends StatefulWidget {
+  @override
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  AudioCache audioCache = AudioCache();
+  AudioPlayer advancedPlayer = AudioPlayer();
+
+  @override
+  void initState() {
+    super.initState();
+
+    if (Platform.isIOS) {
+      if (audioCache.fixedPlayer != null) {
+        audioCache.fixedPlayer.startHeadlessService();
+      }
+    }
+  }
+
+  Future<int> _getDuration() async {
+    File audiofile = await audioCache.load('sample.mp3');
+    await advancedPlayer.setUrl(
+      audiofile.path,
+    );
+    int duration = await Future.delayed(
+        Duration(seconds: 2), () => advancedPlayer.getDuration());
+    return duration;
+  }
+
+  getLocalFileDuration() {
+    return FutureBuilder<int>(
+      future: _getDuration(),
+      builder: (BuildContext context, AsyncSnapshot<int> snapshot) {
+      return  Text(
+            'sample.mp3 duration is: ${Duration(milliseconds: snapshot.data)}');
+      }
+        );
+  }
+
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+          appBar: AppBar(
+
+            title: Text('audioplayers Example'),
+          ),
+          body: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text('Play Local Asset \'sample.mp3\':'),
+
+                SizedBox(height: 30),
+
+                RaisedButton(
+                  child: Text("Play Audio"),
+                  onPressed: () => audioCache.play('sample.mp3')),
+
+                SizedBox(height: 30),
+
+                getLocalFileDuration(),
+              ],
+            ),
+          ),
+        );
+  }
+}
+
+1.
+
+video:
+http: ^0.12.2
+video_player:
+
+2.
+    <uses-permission android:name="android.permission.INTERNET"/>
+
+
+3.ios:
+<key>NSAppTransportSecurity</key>
+<dict>
+  <key>NSAllowsArbitraryLoads</key>
+  <true/>
+</dict>
+
+4.
+
+import 'dart:async';
+
+import 'package:flutter/material.dart';
+import 'package:video_player/video_player.dart';
+
+void main() => runApp(VideoPlayerApp());
+
+class VideoPlayerApp extends StatelessWidget {
+@override
+Widget build(BuildContext context) {
+	return MaterialApp(
+	title: 'GeeksForGeeks',
+	home: VideoPlayerScreen(),
+	);
+}
+}
+
+class VideoPlayerScreen extends StatefulWidget {
+VideoPlayerScreen({Key key}) : super(key: key);
+
+@override
+_VideoPlayerScreenState createState() => _VideoPlayerScreenState();
+}
+
+class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
+VideoPlayerController _controller;
+Future<void> _initializeVideoPlayerFuture;
+
+@override
+void initState() {
+	_controller = VideoPlayerController.network(
+	'https://flutter.github.io/assets-for-api-docs/assets/videos/bee.mp4',
+	);
+	_initializeVideoPlayerFuture = _controller.initialize();
+
+	_controller.setLooping(true);
+
+	super.initState();
+}
+
+@override
+void dispose() {
+	_controller.dispose();
+
+	super.dispose();
+}
+
+@override
+Widget build(BuildContext context) {
+	return Scaffold(
+	appBar: AppBar(
+		title: Text('GeeksForGeeks'),
+		backgroundColor: Colors.green,
+	),
+	body: FutureBuilder(
+		future: _initializeVideoPlayerFuture,
+		builder: (context, snapshot) {
+		if (snapshot.connectionState == ConnectionState.done) {
+			return AspectRatio(
+			aspectRatio: _controller.value.aspectRatio,
+			child: VideoPlayer(_controller),
+			);
+		} else {
+			return Center(child: CircularProgressIndicator());
+		}
+		},
+	),
+	floatingActionButton: FloatingActionButton(
+		onPressed: () {
+		setState(() {
+			// pause
+			if (_controller.value.isPlaying) {
+			_controller.pause();
+			} else {
+			// play
+			_controller.play();
+			}
+		});
+		},
+		// icon
+		child: Icon(
+		_controller.value.isPlaying ? Icons.pause : Icons.play_arrow,
+		),
+	),
+	);
+}
+}
+------------------------------------------------------------------
+check internet connection:
+	
+  dependencies:
+    connectivity_plus: ^1.0.6
+
+
+  import 'dart:async';
+  import 'dart:io';
+  
+  import 'package:flutter/material.dart';
+  import 'package:connectivity_plus/connectivity_plus.dart';
+  
+  void main() => runApp(MyApp());
+  
+  class MyApp extends StatelessWidget {
+  
+    @override
+    Widget build(BuildContext context) {
+      return MaterialApp(
+        title: 'Woolha.com Flutter Tutorial',
+        home: ConnectivityStatusExample(),
+      );
+    }
+  }
+  
+  extension ParseToString on ConnectivityResult {
+  
+    String toValue() {
+      return this.toString().split('.').last;
+    }
+  }
+  
+  class ConnectivityStatusExample extends StatefulWidget {
+  
+    @override
+    State<StatefulWidget> createState() {
+      return _ConnectivityStatusExampleState();
+    }
+  }
+  
+  class _ConnectivityStatusExampleState extends State<ConnectivityStatusExample> {
+  
+    static const TextStyle textStyle = const TextStyle(
+      fontSize: 16,
+    );
+  
+    ConnectivityResult? _connectivityResult;
+    late StreamSubscription _connectivitySubscription;
+    bool? _isConnectionSuccessful;
+  
+    @override
+    initState() {
+      super.initState();
+  
+      _connectivitySubscription = Connectivity().onConnectivityChanged.listen((
+          ConnectivityResult result
+      ) {
+        print('Current connectivity status: $result');
+        setState(() {
+          _connectivityResult = result;
+        });
+      });
+    }
+  
+    @override
+    dispose() {
+      super.dispose();
+  
+      _connectivitySubscription.cancel();
+    }
+  
+    Future<void> _checkConnectivityState() async {
+      final ConnectivityResult result = await Connectivity().checkConnectivity();
+  
+      if (result == ConnectivityResult.wifi) {
+        print('Connected to a Wi-Fi network');
+      } else if (result == ConnectivityResult.mobile) {
+        print('Connected to a mobile network');
+      } else {
+        print('Not connected to any network');
+      }
+  
+      setState(() {
+        _connectivityResult = result;
+      });
+    }
+  
+    Future<void> _tryConnection() async {
+      try {
+        final response = await InternetAddress.lookup('www.woolha.com');
+  
+        setState(() {
+          _isConnectionSuccessful = response.isNotEmpty;
+        });
+      } on SocketException catch (e) {
+        print(e);
+        setState(() {
+          _isConnectionSuccessful = false;
+        });
+      }
+    }
+  
+    @override
+    Widget build(BuildContext context) {
+      return new Scaffold(
+        appBar: AppBar(
+          title: const Text('Woolha.com Flutter Tutorial'),
+          backgroundColor: Colors.teal,
+        ),
+        body: SizedBox(
+          width: double.infinity,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                'Connection status: ${_connectivityResult?.toValue()}',
+                style: textStyle,
+              ),
+              Text(
+                'Is connection success: $_isConnectionSuccessful',
+                style: textStyle,
+              ),
+              OutlinedButton(
+                child: const Text('Check internet connection'),
+                onPressed: () => _checkConnectivityState(),
+              ),
+              OutlinedButton(
+                child: const Text('Try connection'),
+                onPressed: () => _tryConnection(),
+              ),
+            ],
+          ),
+        ),
+      );
+    }
+  }
+
+
+restart app:
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(
+    RestartWidget(
+      child: MaterialApp(),
+    ),
+  );
+}
+
+class RestartWidget extends StatefulWidget {
+  RestartWidget({this.child});
+
+  final Widget child;
+
+  static void restartApp(BuildContext context) {
+    context.findAncestorStateOfType<_RestartWidgetState>().restartApp();
+  }
+
+  @override
+  _RestartWidgetState createState() => _RestartWidgetState();
+}
+
+class _RestartWidgetState extends State<RestartWidget> {
+  Key key = UniqueKey();
+
+  void restartApp() {
+    setState(() {
+      key = UniqueKey();
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return KeyedSubtree(
+      key: key,
+      child: widget.child,
+    );
+  }
+}
+
+current location:
+
+step 1:
+geolocator: ^5.3.1
+
+step 2:
+Android:
+android.useAndroidX=true
+android.enableJetifier=true
+
+permission:
+<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
+
+info.plist:
+
+ios:
+ <key>NSLocationWhenInUseUsageDescription</key>
+   <string>This app needs access to location when open.</string>
+
+   <key>NSLocationAlwaysUsageDescription</key>
+   <string>This app needs access to location when in the background.</string>
+
+   <key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+   <string>This app needs access to location when open and in the background.</string>
+
+continue location update:
+ <key>EnableBackgroundLocationUpdates</key>
+   <true/>
+
+
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:geolocator/geolocator.dart';
+
+class DashboardScreen extends StatefulWidget {
+  @override
+  _DashboardState createState() => _DashboardState();
+}
+
+class _DashboardState extends State<DashboardScreen> {
+  final Geolocator geolocator = Geolocator()..forceAndroidLocationManager;
+  Position _currentPosition;
+  String _currentAddress;
+
+  @override
+  void initState() {
+    super.initState();
+    _getCurrentLocation();
+  }
+
+  _getCurrentLocation() {
+    geolocator
+        .getCurrentPosition(desiredAccuracy: LocationAccuracy.best)
+        .then((Position position) {
+      setState(() {
+        _currentPosition = position;
+      });
+
+      _getAddressFromLatLng();
+    }).catchError((e) {
+      print(e);
+    });
+  }
+
+  _getAddressFromLatLng() async {
+    try {
+      List<Placemark> p = await geolocator.placemarkFromCoordinates(
+          _currentPosition.latitude, _currentPosition.longitude);
+
+      Placemark place = p[0];
+
+      setState(() {
+        _currentAddress =
+            "${place.locality}, ${place.postalCode}, ${place.country}";
+      });
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("DASHBOARD"),
+      ),
+      body: SingleChildScrollView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Container(
+                decoration: BoxDecoration(
+                  color: Theme.of(context).canvasColor,
+                ),
+                padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                child: Column(
+                  children: <Widget>[
+                    Row(
+                      children: <Widget>[
+                        Icon(Icons.location_on),
+                        SizedBox(
+                          width: 8,
+                        ),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              Text(
+                                'Location',
+                                style: Theme.of(context).textTheme.caption,
+                              ),
+                              if (_currentPosition != null &&
+                                  _currentAddress != null)
+                                Text(_currentAddress,
+                                    style:
+                                        Theme.of(context).textTheme.bodyText2),
+                            ],
+                          ),
+                        ),
+                        SizedBox(
+                          width: 8,
+                        ),
+                      ],
+                    ),
+                  ],
+                ))
+          ],
+        ),
+      ),
+    );
+  }
+}
+pdf preview:
+pdf: ^1.5.0
+path_provider: ^1.6.5
+flutter_full_pdf_viewer: ^1.0.6
+
+
+ 
+step 1:
+import 'package:flutter/material.dart';
+import 'package:flutter_full_pdf_viewer/flutter_full_pdf_viewer.dart';
+
+class PdfPreviewScreen extends StatelessWidget {
+final String path;
+
+PdfPreviewScreen({this.path});
+
+@override
+Widget build(BuildContext context) {
+	return PDFViewerScaffold(
+	path: path,
+	);
+}
+}
+
+2.
+import 'dart:io';
+import 'package:flutter/material.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:pdf/pdf.dart';
+import 'package:pdf/widgets.dart' as pw;
+import 'package:pdf_demo/pdf_preview_screen.dart';
+
+
+3.
+
+void main() {
+runApp(MyApp());
+}
+
+class MyApp extends StatelessWidget {
+@override
+Widget build(BuildContext context) {
+	return MaterialApp(
+	title: 'PDF Demo',
+	theme: ThemeData(
+		primarySwatch: Colors.grey,
+		visualDensity: VisualDensity.adaptivePlatformDensity,
+	),
+	home: MyHomePage(),
+	);
+}
+}
+
+4.
+class MyHomePage extends StatelessWidget {
+final pdf = pw.Document();
+
+writeOnPdf() {
+	pdf.addPage(pw.MultiPage(
+	pageFormat: PdfPageFormat.a4,
+	margin: pw.EdgeInsets.all(32),
+	build: (pw.Context context) {
+		return <pw.Widget>[
+		pw.Header(
+			level: 0,
+			child: pw.Row(
+				mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
+				children: <pw.Widget>[
+					pw.Text('Geeksforgeeks', textScaleFactor: 2),
+				])),
+		pw.Header(level: 1, text: 'What is Lorem Ipsum?'),
+			
+		// Write All the paragraph in one line.
+		// For clear understanding
+		// here there are line breaks.
+		pw.Paragraph(
+			text:
+				'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+				tempor incididunt ut labore et dolore magna aliqua. Nunc mi ipsum faucibus
+				vitae aliquet nec. Nibh cras pulvinar mattis nunc sed blandit libero
+				volutpat. Vitae elementum curabitur vitae nunc sed velit. Nibh tellus
+				molestie nunc non blandit massa. Bibendum enim facilisis gravida neque.
+				Arcu cursus euismod quis viverra nibh cras pulvinar mattis. Enim diam
+				vulputate ut pharetra sit. Tellus pellentesque eu tincidunt tortor
+				aliquam nulla facilisi cras fermentum. '),
+		pw.Paragraph(
+			text:
+				'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+				tempor incididunt ut labore et dolore magna aliqua. Nunc mi ipsum faucibus
+				vitae aliquet nec. Nibh cras pulvinar mattis nunc sed blandit libero
+				volutpat Vitae elementum curabitur vitae nunc sed velit. Nibh tellus
+				molestie nunc non blandit massa. Bibendum enim facilisis gravida neque.
+				Arcu cursus euismod quis viverra nibh cras pulvinar mattis. Enim diam
+				vulputate ut pharetra sit. Tellus pellentesque eu tincidunt tortor
+				aliquam nulla facilisi cras fermentum. '),
+		pw.Header(level: 1, text: 'This is Header'),
+		pw.Paragraph(
+			text:
+				'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+				tempor incididunt ut labore et dolore magna aliqua. Nunc mi ipsum faucibus
+				vitae aliquet nec. Nibh cras pulvinar mattis nunc sed blandit libero
+				volutpat. Vitae elementum curabitur vitae nunc sed velit. Nibh tellus
+				molestie nunc non blandit massa. Bibendum enim facilisis gravida neque.
+				Arcu cursus euismod quis viverra nibh cras pulvinar mattis. Enim diam
+				vulputate ut pharetra sit. Tellus pellentesque eu tincidunt tortor aliquam
+				nulla facilisi cras fermentum. Consectetur adipiscing elit duis tristique
+				sollicitudin nibh sit. '),
+		pw.Paragraph(
+			text:
+				'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+				tempor incididunt ut labore et dolore magna aliqua. Nunc mi ipsum faucibus
+				vitae aliquet nec. Nibh cras pulvinar mattis nunc sed blandit libero
+				volutpat. Vitae elementum curabitur vitae nunc sed velit. Nibh tellus
+				molestie nunc non blandit massa. Bibendum enim facilisis gravida neque.
+				Arcu cursus euismod quis viverra nibh cras pulvinar mattis. Enim diam
+				vulputate ut pharetra sit. Tellus pellentesque eu tincidunt tortor aliquam
+				nulla facilisi cras fermentum. Consectetur adipiscing elit duis tristique
+				sollicitudin nibh sit. '),
+		pw.Padding(padding: const pw.EdgeInsets.all(10)),
+		pw.Table.fromTextArray(context: context, data: const <List<String>>[
+			<String>['Year', 'Sample'],
+			<String>['SN0', 'GFG1'],
+			<String>['SN1', 'GFG2'],
+			<String>['SN2', 'GFG3'],
+			<String>['SN3', 'GFG4'],
+		]),
+		];
+	},
+	));
+}
+
+
+5.
+
+Future savePdf() async {
+	Directory documentDirectory = await getApplicationDocumentsDirectory();
+	String documentPath = documentDirectory.path;
+	File file = File("$documentPath/example.pdf");
+	file.writeAsBytesSync(pdf.save());
+}
+
+6.
+Widget build(BuildContext context) {
+	return Scaffold(
+	appBar: AppBar(
+		title: Text("Geeksforgeeks"),
+	),
+	body: Container(
+		padding: EdgeInsets.all(10),
+		child: Column(
+		children: <Widget>[
+			SizedBox(
+			width: double.infinity,
+			child: RaisedButton(
+				color: Colors.blueGrey,
+				child: Text(
+				'Preview PDF',
+				style: TextStyle(
+					fontWeight: FontWeight.bold,
+					fontSize: 18,
+					color: Colors.white),
+				),
+				onPressed: () async {
+				writeOnPdf();
+				await savePdf();
+
+				Directory documentDirectory =
+					await getApplicationDocumentsDirectory();
+
+				String documentPath = documentDirectory.path;
+
+				String fullPath = "$documentPath/example.pdf";
+				print(fullPath);
+
+				Navigator.push(
+					context,
+					MaterialPageRoute(
+						builder: (context) => PdfPreviewScreen(
+								path: fullPath,
+							)));
+				},
+			),
+			),
+		],
+		),
+	),
+	);
+}
+}
+
+
+Quiz App:
+
+1.main.dart:
+import 'package:flutter/material.dart';
+
+import './quiz.dart';
+import './result.dart';
+
+void main() => runApp(MyApp());
+
+class MyApp extends StatefulWidget {
+@override
+State<StatefulWidget> createState() {
+	return _MyAppState();
+}
+}
+
+class _MyAppState extends State<MyApp> {
+final _questions = const [
+	{
+	'questionText': 'Q1. Who created Flutter?',
+	'answers': [
+		{'text': 'Facebook', 'score': -2},
+		{'text': 'Adobe', 'score': -2},
+		{'text': 'Google', 'score': 10},
+		{'text': 'Microsoft', 'score': -2},
+	],
+	},
+	{
+	'questionText': 'Q2. What is Flutter?',
+	'answers': [
+		{'text': 'Android Development Kit', 'score': -2},
+		{'text': 'IOS Development Kit', 'score': -2},
+		{'text': 'Web Development Kit', 'score': -2},
+		{
+		'text':
+			'SDK to build beautiful IOS, Android, Web & Desktop Native Apps',
+		'score': 10
+		},
+	],
+	},
+	{
+	'questionText': ' Q3. Which programing language is used by Flutter',
+	'answers': [
+		{'text': 'Ruby', 'score': -2},
+		{'text': 'Dart', 'score': 10},
+		{'text': 'C++', 'score': -2},
+		{'text': 'Kotlin', 'score': -2},
+	],
+	},
+	{
+	'questionText': 'Q4. Who created Dart programing language?',
+	'answers': [
+		{'text': 'Lars Bak and Kasper Lund', 'score': 10},
+		{'text': 'Brendan Eich', 'score': -2},
+		{'text': 'Bjarne Stroustrup', 'score': -2},
+		{'text': 'Jeremy Ashkenas', 'score': -2},
+	],
+	},
+	{
+	'questionText':
+		'Q5. Is Flutter for Web and Desktop available in stable version?',
+	'answers': [
+		{
+		'text': 'Yes',
+		'score': -2,
+		},
+		{'text': 'No', 'score': 10},
+	],
+	},
+];
+
+var _questionIndex = 0;
+var _totalScore = 0;
+
+void _resetQuiz() {
+	setState(() {
+	_questionIndex = 0;
+	_totalScore = 0;
+	});
+}
+
+void _answerQuestion(int score) {
+	_totalScore += score;
+
+	setState(() {
+	_questionIndex = _questionIndex + 1;
+	});
+	print(_questionIndex);
+	if (_questionIndex < _questions.length) {
+	print('We have more questions!');
+	} else {
+	print('No more questions!');
+	}
+}
+
+@override
+Widget build(BuildContext context) {
+	return MaterialApp(
+	home: Scaffold(
+		appBar: AppBar(
+		title: Text('Geeks for Geeks'),
+		backgroundColor: Color(0xFF00E676),
+		),
+		body: Padding(
+		padding: const EdgeInsets.all(30.0),
+		child: _questionIndex < _questions.length
+			? Quiz(
+				answerQuestion: _answerQuestion,
+				questionIndex: _questionIndex,
+				questions: _questions,
+				) //Quiz
+			: Result(_totalScore, _resetQuiz),
+		), //Padding
+	), //Scaffold
+	debugShowCheckedModeBanner: false,
+	); //MaterialApp
+}
+}
+
+2.quiz.dart:
+import 'package:flutter/material.dart';
+
+import './answer.dart';
+import './question.dart';
+
+class Quiz extends StatelessWidget {
+final List<Map<String, Object>> questions;
+final int questionIndex;
+final Function answerQuestion;
+
+Quiz({
+	required this.questions,
+	required this.answerQuestion,
+	required this.questionIndex,
+});
+
+@override
+Widget build(BuildContext context) {
+	return Column(
+	children: [
+		Question(
+		questions[questionIndex]['questionText'],
+		), //Question
+		...(questions[questionIndex]['answers'] as List<Map<String, Object>>)
+			.map((answer) {
+		return Answer(() => answerQuestion(answer['score']), answer['text']);
+		}).toList()
+	],
+	); //Column
+}
+}
+
+3.question.dart:
+import 'package:flutter/material.dart';
+
+class Question extends StatelessWidget {
+final String questionText;
+
+Question(this.questionText);
+
+@override
+Widget build(BuildContext context) {
+	return Container(
+	width: double.infinity,
+	margin: EdgeInsets.all(10),
+	child: Text(
+		questionText,
+		style: TextStyle(fontSize: 28),
+		textAlign: TextAlign.center,
+	), //Text
+	); //Container
+}
+}
+
+
+answer.dart:
+import 'package:flutter/material.dart';
+
+class Answer extends StatelessWidget {
+final Function selectHandler;
+final String answerText;
+
+Answer(this.selectHandler, this.answerText);
+
+@override
+Widget build(BuildContext context) {
+	return Container(
+	width: double.infinity,
+	child: RaisedButton(
+		color: Color(0xFF00E676),
+		textColor: Colors.white,
+		child: Text(answerText),
+		onPressed: selectHandler,
+	), //RaisedButton
+	); //Container
+}
+}
+
+result.dart:
+import 'package:flutter/material.dart';
+
+class Result extends StatelessWidget {
+final int resultScore;
+final Function resetHandler;
+
+Result(this.resultScore, this.resetHandler);
+
+//Remark Logic
+String get resultPhrase {
+	String resultText;
+	if (resultScore >= 41) {
+	resultText = 'You are awesome!';
+	print(resultScore);
+	} else if (resultScore >= 31) {
+	resultText = 'Pretty likeable!';
+	print(resultScore);
+	} else if (resultScore >= 21) {
+	resultText = 'You need to work more!';
+	} else if (resultScore >= 1) {
+	resultText = 'You need to work hard!';
+	} else {
+	resultText = 'This is a poor score!';
+	print(resultScore);
+	}
+	return resultText;
+}
+
+@override
+Widget build(BuildContext context) {
+	return Center(
+	child: Column(
+		mainAxisAlignment: MainAxisAlignment.center,
+		children: <Widget>[
+		Text(
+			resultPhrase,
+			style: TextStyle(fontSize: 26, fontWeight: FontWeight.bold),
+			textAlign: TextAlign.center,
+		), //Text
+		Text(
+			'Score ' '$resultScore',
+			style: TextStyle(fontSize: 36, fontWeight: FontWeight.bold),
+			textAlign: TextAlign.center,
+		), //Text
+		FlatButton(
+			child: Text(
+			'Restart Quiz!',
+			), //Text
+			textColor: Colors.blue,
+			onPressed: resetHandler,
+		), //FlatButton
+		], //<Widget>[]
+	), //Column
+	); //Center
+}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
