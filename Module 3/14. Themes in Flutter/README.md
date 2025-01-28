@@ -1,4 +1,4 @@
-# crpt_theme_day2
+# Theme Example
 
 A new Flutter project.
 
